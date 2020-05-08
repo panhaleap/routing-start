@@ -13,22 +13,7 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-const appRoutes: Routes = [
-  {path: '' , component: HomeComponent}, // localhost:4200/home
-  {path: 'users', component: UsersComponent, children: [
-    {path: ':id/:name', component: UserComponent}, // localhost:4200/users
-  ]}, // localhost:4200/users
-
-  {path: 'servers', component: ServersComponent, children: [
-    {path: ':id', component: ServerComponent}, // localhost:4200/servers
-    {path: ':id/edit', component: EditServerComponent} // localhost:4200/servers
-  ]}, // localhost:4200/servers
-
-  {path: 'not-found', component: PageNotFoundComponent},
-  // tslint:disable-next-line: max-line-length
-  {path: '**', redirectTo: '/not-found'} // ** is wildcard which catchs all routes we don't know. Make sure this define in the last of Routes.
-];
+import { AppRoutingModule } from './app-routing.modules';
 
 @NgModule({
   declarations: [
@@ -44,7 +29,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
   providers: [ServersService],
   bootstrap: [AppComponent]
