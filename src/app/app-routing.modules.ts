@@ -8,6 +8,7 @@ import { ServersComponent } from "./servers/servers.component";
 import { UserComponent } from "./users/user/user.component";
 import { UsersComponent } from "./users/users.component";
 import { HomeComponent } from "./home/home.component";
+import { AuthGuard } from "./auth-guard.service";
 
 const appRoutes: Routes = [
     {path: '' , component: HomeComponent}, // localhost:4200/home
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
       {path: ':id/:name', component: UserComponent}, // localhost:4200/users
     ]}, // localhost:4200/users
 
-    {path: 'servers', component: ServersComponent, children: [
+    // this meant, until canActivate method in auth-quard.service class return true then we can access to path: 'servers'
+    {path: 'servers', canActivate: [AuthGuard], component: ServersComponent, children: [
       {path: ':id', component: ServerComponent}, // localhost:4200/servers
       {path: ':id/edit', component: EditServerComponent} // localhost:4200/servers
     ]}, // localhost:4200/servers
