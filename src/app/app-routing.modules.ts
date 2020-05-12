@@ -17,7 +17,12 @@ const appRoutes: Routes = [
     ]}, // localhost:4200/users
 
     // this meant, until canActivate method in auth-quard.service class return true then we can access to path: 'servers'
-    {path: 'servers', canActivate: [AuthGuard], component: ServersComponent, children: [
+    // with canActivate method, we protect both children and parent route
+    {path: 'servers',
+    // canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    component: ServersComponent,
+    children: [
       {path: ':id', component: ServerComponent}, // localhost:4200/servers
       {path: ':id/edit', component: EditServerComponent} // localhost:4200/servers
     ]}, // localhost:4200/servers
