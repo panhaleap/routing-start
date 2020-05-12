@@ -9,7 +9,7 @@ export class AuthService {
             (resolve , reject) => {
                 setTimeout(() => {
                     resolve(this.loggedIn);
-                }, 800);
+                }, 800); // this 800 mean that when user click on button service then after 800 milisecond it will resolve(this.loggedIn)
             }
         );
         return promise;
