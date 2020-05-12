@@ -1,14 +1,15 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
-import { EditServerComponent } from "./servers/edit-server/edit-server.component";
-import { ServerComponent } from "./servers/server/server.component";
-import { ServersComponent } from "./servers/servers.component";
-import { UserComponent } from "./users/user/user.component";
-import { UsersComponent } from "./users/users.component";
-import { HomeComponent } from "./home/home.component";
-import { AuthGuard } from "./auth-guard.service";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EditServerComponent } from './servers/edit-server/edit-server.component';
+import { ServerComponent } from './servers/server/server.component';
+import { ServersComponent } from './servers/servers.component';
+import { UserComponent } from './users/user/user.component';
+import { UsersComponent } from './users/users.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth-guard.service';
+import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 
 const appRoutes: Routes = [
     {path: '' , component: HomeComponent}, // localhost:4200/home
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     component: ServersComponent,
     children: [
       {path: ':id', component: ServerComponent}, // localhost:4200/servers
-      {path: ':id/edit', component: EditServerComponent} // localhost:4200/servers
+      // Angular will run canDeactivate when we want to leave this path ':id/edit'
+      {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]} // localhost:4200/servers
     ]}, // localhost:4200/servers
 
     {path: 'not-found', component: PageNotFoundComponent},

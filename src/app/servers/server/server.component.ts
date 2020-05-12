@@ -29,10 +29,15 @@ export class ServerComponent implements OnInit {
 
   onEdit() {
     // tslint:disable-next-line: max-line-length
-    this.router.navigate(['edit'], {relativeTo: this.route}); // actually we wrtie  this.router.navigate([ '/servers', this.server.id,'edit']);
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'}); // actually we wrtie  this.router.navigate([ '/servers', this.server.id,'edit']);
                                                               // but we already in the /servers path so we write this, it's enough
                                                               // tslint:disable-next-line: max-line-length
                                                               // with this.route, angular will know with route we want to navigate relatively.
+                                                              // tslint:disable-next-line: max-line-length
+                                                              // queryParamsHandling: 'preserve' is keep the URL of some queryParam the same if it their position is not change by the destiny route
+                                                              // tslint:disable-next-line: max-line-length
+                                                              // Example: current URL something/1/currentRoute/ss and the destiny URL will be something/nextRoute so destiny URL will be 
+                                                              // something/1/nextRoute/ss
   }
 
 }
