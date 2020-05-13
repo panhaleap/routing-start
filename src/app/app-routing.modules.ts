@@ -40,6 +40,19 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
+        // Because server that will hosting our app will be looking for file like index.html, or other html file
+        // but for angular we have only one single page and it's index.html. So we we use exmple: Ourdomain/user
+        // then the hosting server will look for user file. But we don't have and we only have one file is index.html
+        // So we will get error from server hosting, error 404.
+
+        // useHash: false by default if we don't specify.
+        // useHash will be made the Url to Ourdomain/#/somethingBlaBla. This tell the server that we host our app to only
+        // Care about what before the sign # and it is ourDomainName like localhost:portNumber.
+        // so it will use our index.html file
+        // And the rest /somethingBlaBla will handle by angular
+        /*
+        RouterModule.forRoot(appRoutes, {useHash: true})
+        */
         RouterModule.forRoot(appRoutes)
     ],
     exports: [RouterModule]
