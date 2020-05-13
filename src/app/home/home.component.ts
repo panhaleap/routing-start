@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
   onLoadServer(id: number) {
     // "/servers" is absolute path
     // is relative path
-    this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
+    // fragement is something like this '#loading
+    this.router.navigate(['/servers', id, 'edit'], {queryParams: {allowEdit: '0'}, fragment: 'loading'});
   }
 
   onLogin() {

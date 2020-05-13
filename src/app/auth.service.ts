@@ -1,6 +1,3 @@
-import { resolve } from "dns";
-import { rejects } from "assert";
-
 export class AuthService {
     loggedIn = false;
 

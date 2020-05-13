@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth-guard.service';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const appRoutes: Routes = [
     {path: '' , component: HomeComponent}, // localhost:4200/home
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
       {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]} // localhost:4200/servers
     ]}, // localhost:4200/servers
 
-    {path: 'not-found', component: PageNotFoundComponent},
+    // {path: 'not-found', component: PageNotFoundComponent},
+    {path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not found!'}},
     // tslint:disable-next-line: max-line-length
     {path: '**', redirectTo: '/not-found'} // ** is wildcard which catchs all routes we don't know. Make sure this define in the last of Routes.
   ];
