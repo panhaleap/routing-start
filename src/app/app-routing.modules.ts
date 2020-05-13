@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth-guard.service';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate-guard.service';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { ServerResolver } from './servers/server/server-resolver.service';
 
 const appRoutes: Routes = [
     {path: '' , component: HomeComponent}, // localhost:4200/home
@@ -22,12 +23,13 @@ const appRoutes: Routes = [
     // with canActivate method, we protect both children and parent route
     {path: 'servers',
     // canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
-    component: ServersComponent,
-    children: [
-      {path: ':id', component: ServerComponent}, // localhost:4200/servers
-      // Angular will run canDeactivate when we want to leave this path ':id/edit'
-      {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]} // localhost:4200/servers
+      canActivateChild: [AuthGuard],
+      component: ServersComponent,
+        children: [
+          // This ServiceResolver will map the data, this resolver gives us back some data
+          {path: ':id', component: ServerComponent, resolve: {server: ServerResolver}}, // localhost:4200/servers
+          // Angular will run canDeactivate when we want to leave this path ':id/edit'
+          {path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard]} // localhost:4200/servers
     ]}, // localhost:4200/servers
 
     // {path: 'not-found', component: PageNotFoundComponent},
